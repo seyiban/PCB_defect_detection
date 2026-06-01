@@ -1,0 +1,39 @@
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def run_dashboard():
+    st.title("🔎 PCB 결함 탐지 모델 분석 대시보드")
+    st.markdown("---")
+
+    # 1. 데이터셋 통계 시각화
+    st.subheader("📊 학습 데이터셋 분포")
+    
+    # 임의의 PCB 데이터 세트 통계 데이터 (과제 시연용)
+    data = {
+        "상태": ["정상 (Normal)", "스크래치 (Scratch)", "회로 단선 (Open Circuit)", "오염 (Contamination)"],
+        "이미지 수": [450, 120, 95, 110]
+    }
+    df = pd.DataFrame(data)
+    
+    # Streamlit 내장 차트로 예쁘게 보여주기
+    st.bar_chart(df.set_index("상태"))
+    
+    # 2. 결함 유형별 가이드라인 안내 정보 (정연님 기여 파트 강조)
+    st.subheader("💡 PCB 결함 유형별 판단 기준 정의")
+    
+    with st.expander("1. 스크래치 (Scratch) 기준 검토"):
+        st.write("동선(Copper Trace) 표면에 미세한 긁힘이 발생하여 두께가 얇아진 상태를 의미합니다.")
+    
+    with st.expander("2. 회로 단선 (Open Circuit) 기준 검토"):
+        st.write("패턴이 완전히 끊어져 전류가 흐르지 않는 치명적인 결함입니다.")
+        
+    with st.expander("3. 오염 (Contamination) 기준 검토"):
+        st.write("이물질이나 납땜 잔여물이 표면에 남아 쇼트를 유발할 수 있는 상태입니다.")
+
+    st.success("✅ 대시보드 모듈 로드 완료. 메인 app.py에 연동하여 사용할 수 있습니다.")
+
+# 독립 실행 가능하도록 설정
+if __name__ == "__main__":
+    run_dashboard()
