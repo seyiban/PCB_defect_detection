@@ -1,1 +1,5 @@
-streamlit\ntorch\ntorchvision\nPillow
+streamlit
+torch
+torchvision
+Pillow
+numpy
